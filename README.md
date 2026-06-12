@@ -1,6 +1,6 @@
 # Soberly
 
-Soberly is a static voice-first date coach prototype. Users can speak or type a date recap, then get post-date guidance about what to consider, what to do next, what signals to watch for, and ideas for future dates.
+Soberly is a static voice-first date coach prototype. Users can speak or type a date recap, then get conversational post-date advice: how to think about what happened, what to do next, what signals to watch for, and ideas for future dates.
 
 ## Run locally
 
