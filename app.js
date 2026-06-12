@@ -35,41 +35,41 @@ const issueSignals = [
     key: "communication",
     label: "Communication",
     pattern: /text|texts|reply|replied|message|messages|ghost|ghosted|dry|busy|slow|plans|plan|follow up|follow-up/,
-    meaning: "The issue may be less about whether they like you and more about whether their communication style feels steady enough for you.",
-    action: "Give it one clear, low-pressure opportunity to become easier. Ask for a specific next plan or a direct read on the vibe, then watch whether their response reduces confusion or creates more of it.",
-    watch: "Look for consistency: do they reply with warmth, offer a real time, and make planning feel shared rather than like a guessing game?"
+    meaning: "Okay, I would not jump straight to “they are not interested.” I would treat this as a communication-style question: does the way they follow up actually feel good to you?",
+    action: "If you still want to see them, give it one simple opening instead of trying to decode every text. You could say you had fun and ask about one specific low-key plan, then see whether they meet you there.",
+    watch: "Look for whether their reply makes you feel calmer. Warmth, a real time, and shared planning are good signs. More vagueness is also information."
   },
   {
     key: "chemistry",
     label: "Chemistry",
     pattern: /spark|chemistry|kiss|touch|flirt|flirty|attracted|attraction|butterflies|vibe|connection|connected/,
-    meaning: "Chemistry is useful information, but it can make unclear behavior feel more meaningful than it actually is.",
-    action: "Separate attraction from evidence. Notice what you enjoyed, then ask whether the date also had ease, curiosity, kindness, and follow-through.",
-    watch: "After the date, look for grounded interest: they remember details, ask about you, and help move things forward without relying only on flirtation."
+    meaning: "I get why you are thinking about it if there was chemistry. The only thing I would be careful about is letting the spark do all the talking for them.",
+    action: "Hold onto what felt exciting, but pair it with evidence. If you want to continue, make the next step easy and specific, then notice whether they show up with curiosity and effort.",
+    watch: "Look for grounded interest after the date: they remember details, ask about you, and help make the next plan. Chemistry plus effort is the thing."
   },
   {
     key: "awkwardness",
     label: "Awkwardness",
     pattern: /awkward|quiet|silence|nervous|anxious|weird|stilted|shy|uncomfortable|tense/,
-    meaning: "Awkwardness can mean incompatibility, but it can also mean first-date nerves or a setting that did not help either of you relax.",
-    action: "Do not over-read one clumsy moment. If there were also signs of kindness or curiosity, try a shorter, more active second date where conversation has something to orbit around.",
-    watch: "Look for whether the awkwardness softens with a clearer plan. If you feel smaller, tense, or self-editing again, that is more important than whether the date was technically polite."
+    meaning: "A little awkwardness does not automatically mean “no.” Sometimes it is nerves, the setting, or two people taking a minute to find a rhythm.",
+    action: "If there were also sweet or curious moments, I would not throw it out yet. Try a shorter second date with something to do, so the conversation has a little structure.",
+    watch: "Pay attention to your body next time. If the awkwardness softens, great. If you feel tense, small, or like you are performing, that matters."
   },
   {
     key: "boundaries",
     label: "Boundaries",
     pattern: /pushy|rude|ignored|pressure|unsafe|mean|jealous|dismissive|interrupted|drunk|angry|uncomfortable/,
-    meaning: "This sounds like a boundary signal, not just a dating-strategy puzzle.",
-    action: "Prioritize your sense of ease. You do not need to keep exploring someone who made you feel pressured, dismissed, or unsafe just because there were good moments too.",
-    watch: "If you do continue talking, look for accountability without defensiveness. A real repair feels calm, specific, and changed in behavior."
+    meaning: "This is the part where I would slow down. If you felt pressured, dismissed, or unsafe, that is not just a tiny dating puzzle to solve.",
+    action: "You do not have to keep giving access to someone who made you feel uneasy. If you do respond, keep it clear and self-protective rather than trying to make them understand everything.",
+    watch: "If you keep talking, look for accountability without defensiveness. A real repair feels calm and specific, and then the behavior actually changes."
   },
   {
     key: "values",
     label: "Values",
     pattern: /kids|marriage|religion|politics|money|career|family|ex|drinking|party|partying|values|future|serious|casual/,
-    meaning: "This may be a compatibility question more than a chemistry question.",
-    action: "Name the value underneath the concern. Before planning too far ahead, ask one honest question that reveals whether you are aiming for similar things.",
-    watch: "Listen for clarity and respect. You do not need identical answers, but you do need answers that make you feel more informed rather than more foggy."
+    meaning: "This sounds less like “did the date go well?” and more like “are we pointed in compatible directions?” That is worth taking seriously.",
+    action: "Name the value underneath the concern, then ask one honest question before you get more invested. You are not being intense; you are checking whether continuing makes sense.",
+    watch: "Listen for clarity and respect. You do not need identical answers, but you should feel more informed after the conversation, not more foggy."
   }
 ];
 
@@ -229,7 +229,7 @@ function detectInterests(text) {
 function analyzeStory() {
   const raw = storyInput.value.trim();
   if (!raw) {
-    coachMessage.textContent = "Give me a little material first: what happened, how you felt, and what you want next.";
+    coachMessage.textContent = "Tell me a little more first: what happened, how you felt after, and what you are wondering about now.";
     return;
   }
 
@@ -244,17 +244,17 @@ function analyzeStory() {
   const momentum = Math.max(1, Math.min(10, 4 + positive + (text.includes("text") || text.includes("again") ? 1.4 : 0) - uncertain * 0.7 - boundary * 1.2));
   const interests = detectInterests(text);
 
-  let nextStep = "Reflect";
-  let headline = "The useful move is to turn the date into information, not pressure yourself into a perfect next text.";
+  let nextStep = "Talk it through";
+  let headline = "My honest read: do not pressure yourself to decide everything right now. Let us sort what felt good, what felt off, and what you would need to see next.";
   if (boundary > 0) {
-    nextStep = "Set boundary";
-    headline = "Some part of this deserves a boundary check before you decide whether to continue.";
+    nextStep = "Protect your peace";
+    headline = "I would slow down here. Before you think about keeping the connection going, pay attention to the part of you that felt uncomfortable.";
   } else if (vibe >= 7 && momentum >= 6) {
-    nextStep = "Look for effort";
-    headline = "The energy sounds promising. Now look for whether their effort matches the chemistry.";
+    nextStep = "Keep it light";
+    headline = "This sounds promising. If you want to continue, I would keep it simple and look for whether their effort matches the chemistry.";
   } else if (uncertain >= 2 || questionMarks > 1) {
-    nextStep = "Clarify";
-    headline = "The next move is clarity: notice what felt uncertain, then test it gently instead of guessing.";
+    nextStep = "Get clarity";
+    headline = "It makes sense that you feel unsure. I would not spiral on it; I would gently test the unclear part and let their response tell you more.";
   }
 
   lastAnalysis = { raw, text, positive, uncertain, boundary, vibe, momentum, interests, issues, nextStep, headline };
@@ -271,9 +271,9 @@ function renderAnalysis(analysis) {
 
   const mainIssue = analysis.issues[0];
   const advice = [
-    [`If the issue is ${mainIssue.label.toLowerCase()}`, mainIssue.meaning],
-    ["What to do next", buildActionAdvice(analysis, mainIssue)],
-    ["What to watch for", buildWatchAdvice(analysis, mainIssue)]
+    ["How I would read it", mainIssue.meaning],
+    ["What I would do next", buildActionAdvice(analysis, mainIssue)],
+    ["What I would watch for", buildWatchAdvice(analysis, mainIssue)]
   ];
 
   adviceList.innerHTML = advice.map(([title, body]) => `
@@ -295,19 +295,19 @@ function detectIssues(text, scores) {
   return matched.length ? matched : [{
     key: "general",
     label: "the overall read",
-    meaning: "The date is giving you data about ease, interest, and compatibility. Try not to force it into a yes or no before you name what you actually felt.",
-    action: "Write down three things: what felt good, what felt off, and what you would need to see next time to feel more confident.",
-    watch: "Look for whether your body feels calmer after their next interaction. Good momentum usually makes things simpler, not more confusing."
+    meaning: "I would treat this date as information, not a verdict. Before deciding yes or no, name what felt easy, what felt weird, and what you are hoping is true.",
+    action: "If you are open to continuing, send something simple and specific. If you are not sure, it is okay to take a beat and ask yourself what you would need to feel more comfortable.",
+    watch: "Notice whether the next interaction makes things feel simpler. A good next step usually gives you more ease, not more mental homework."
   }];
 }
 
 function buildActionAdvice(analysis, issue) {
   if (analysis.boundary > 0) return issue.action;
   if (analysis.vibe >= 7 && analysis.momentum >= 6) {
-    return `${issue.action} If you want another date, suggest one simple plan, then let their follow-through tell you as much as their words.`;
+    return `${issue.action} You do not need a huge speech. Something like, “I had a really nice time and would be up for seeing you again,” is enough. Then let their follow-through tell you as much as their words.`;
   }
   if (analysis.uncertain >= 2) {
-    return `${issue.action} Keep your next step small enough that you can observe their response without feeling over-invested.`;
+    return `${issue.action} Keep the next step small enough that you can observe their response without feeling like you are over-investing.`;
   }
   return issue.action;
 }
@@ -315,10 +315,10 @@ function buildActionAdvice(analysis, issue) {
 function buildWatchAdvice(analysis, issue) {
   if (analysis.boundary > 0) return issue.watch;
   if (analysis.positive > analysis.uncertain) {
-    return `${issue.watch} Also notice whether the good parts repeat when there is less novelty and more ordinary planning.`;
+    return `${issue.watch} Also notice whether the good parts repeat when there is less novelty and more ordinary planning. That is usually where the real signal shows up.`;
   }
   if (analysis.uncertain >= 2) {
-    return `${issue.watch} If you keep needing to decode them, treat that as information instead of a challenge to solve.`;
+    return `${issue.watch} If you keep needing to decode them, I would treat that as information instead of a challenge you have to solve.`;
   }
   return issue.watch;
 }
