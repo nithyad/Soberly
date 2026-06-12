@@ -1,12 +1,91 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Soberly Voice Date Coach</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Datewise Voice Agent</title>
+    <link rel="stylesheet" href="./styles.css?v=4">
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <main class="shell">
+      <section class="workspace" aria-label="Datewise voice agent">
+        <div class="agent-pane">
+          <header class="topbar">
+            <div>
+              <p class="eyebrow">Datewise</p>
+              <h1>Talk through the date. Leave with a next move.</h1>
+            </div>
+            <div class="status" id="supportStatus">Checking voice support</div>
+          </header>
+
+          <div class="agent-stage">
+            <img class="scene" src="./datewise-scene.png" alt="Warm abstract table scene for a date debrief">
+            <div class="pulse-wrap" aria-hidden="true">
+              <div class="pulse pulse-one"></div>
+              <div class="pulse pulse-two"></div>
+              <button class="mic-button" id="micButton" type="button" aria-label="Start voice capture">
+                <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                  <path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3Z"></path>
+                  <path d="M19 11a7 7 0 0 1-14 0"></path>
+                  <path d="M12 18v3"></path>
+                  <path d="M8 21h8"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="controls" aria-label="Voice controls">
+            <button class="primary" id="listenButton" type="button">Start talking</button>
+            <button class="secondary" id="analyzeButton" type="button">Get advice</button>
+            <a class="local-link" id="localLink" href="http://127.0.0.1:8766/index.html">Open mic preview</a>
+            <label class="toggle">
+              <input id="speakToggle" type="checkbox" checked>
+              <span>Speak replies</span>
+            </label>
+          </div>
+
+          <label class="entry-label" for="dateStory">What happened on the date?</label>
+          <textarea id="dateStory" spellcheck="true" placeholder="Say or type the story: what felt good, where it got awkward, what they said, what you want, and anything you are unsure about."></textarea>
+        </div>
+
+        <aside class="insight-pane" aria-label="Advice and next date ideas">
+          <div class="tabs" role="tablist" aria-label="Advice views">
+            <button class="tab active" id="adviceTab" type="button" aria-selected="true">Advice</button>
+            <button class="tab" id="ideasTab" type="button" aria-selected="false">Next dates</button>
+          </div>
+
+          <section class="panel active" id="advicePanel" aria-labelledby="adviceTab">
+            <div class="coach-message" id="coachMessage">
+              Tell me how it went. I will listen for chemistry, clarity, hesitation, and signs of momentum.
+            </div>
+            <div class="metric-grid" aria-label="Date read">
+              <div class="metric">
+                <span>Vibe</span>
+                <strong id="vibeScore">-</strong>
+              </div>
+              <div class="metric">
+                <span>Momentum</span>
+                <strong id="momentumScore">-</strong>
+              </div>
+              <div class="metric">
+                <span>Next step</span>
+                <strong id="nextStepLabel">-</strong>
+              </div>
+            </div>
+            <div class="advice-list" id="adviceList"></div>
+          </section>
+
+          <section class="panel" id="ideasPanel" aria-labelledby="ideasTab">
+            <div class="idea-toolbar">
+              <span>Tailored ideas</span>
+              <button class="secondary compact" id="shuffleButton" type="button">Refresh</button>
+            </div>
+            <div class="idea-list" id="ideaList"></div>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./app.js?v=4"></script>
   </body>
 </html>

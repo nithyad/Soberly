@@ -1,30 +1,15 @@
-# Soberly Voice Date Coach Demo
+# Soberly
 
-Soberly is a React + Vite prototype for a website that embeds a voice-first dating coach. Users can talk through a date or type a recap, then receive next steps, second-date ideas, and follow-up message starters.
+Soberly is a static voice-first date coach prototype. Users can speak or type a date recap, then get post-date guidance about what to consider, what to do next, what signals to watch for, and ideas for future dates.
 
-## Run the demo locally
+## Run locally
 
-```bash
-npm install
-npm run dev
-```
-
-Open the local Vite URL, usually <http://127.0.0.1:5173/> or <http://localhost:5173/>.
-
-## Demo walkthrough
-
-1. Click **Try the coach** in the navigation or **Start talking** in the hero.
-2. In the voice-agent section, choose one of the **Try a demo** recaps:
-   - **Great chemistry** shows a high-momentum follow-up.
-   - **Mixed signals** shows a slower, lower-pressure second-date plan.
-   - **Boundary concern** shows safety-forward advice.
-3. Optionally click **Read advice aloud** to hear the generated recommendation.
-4. To demo live speech, click **Start talking** and allow microphone access. Browser voice input works best in Chrome or Edge; the text area remains available everywhere.
-
-## Quality checks
+Serve the folder from a local HTTP server so browser microphone permissions work:
 
 ```bash
-npm test
-npm run build
-npm run lint
+python3 -m http.server 8766
 ```
+
+Then open <http://127.0.0.1:8766/>.
+
+Voice input depends on browser support for speech recognition and microphone permissions. The text box fallback works in any modern browser.
