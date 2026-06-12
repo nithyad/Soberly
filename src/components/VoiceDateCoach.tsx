@@ -10,6 +10,24 @@ const prompts = [
   'What would you like to happen next?',
 ];
 
+const demoRecaps = [
+  {
+    label: 'Great chemistry',
+    recap:
+      'The date was amazing. We got coffee, laughed a lot, and the conversation felt easy. There was real chemistry and I want to ask for a second date.',
+  },
+  {
+    label: 'Mixed signals',
+    recap:
+      'I am unsure how I feel. Dinner was nice but a little awkward, and their texts after the date are confusing. I might want a short second date to learn more.',
+  },
+  {
+    label: 'Boundary concern',
+    recap:
+      'They were fun at first, but then they got rude to the server and pressured me to go somewhere private. I felt unsafe and want help deciding what to say.',
+  },
+];
+
 function speakAdvice(text: string) {
   if (!('speechSynthesis' in window)) {
     return;
@@ -32,6 +50,12 @@ export function VoiceDateCoach() {
   const recognitionSupported = typeof window !== 'undefined' && Boolean(getSpeechRecognitionConstructor());
   const advice = useMemo(() => buildDateAdvice(transcript), [transcript]);
   const hasTranscript = transcript.trim().length > 0;
+
+  const loadDemoRecap = (recap: string) => {
+    stopListening();
+    setError(null);
+    setTranscript(recap);
+  };
 
   const startListening = () => {
     const Recognition = getSpeechRecognitionConstructor();
@@ -124,6 +148,15 @@ export function VoiceDateCoach() {
       </div>
 
       <div className="coach-panel recorder-panel">
+        <div className="demo-strip" aria-label="Demo recaps">
+          <span>Try a demo:</span>
+          {demoRecaps.map((demo) => (
+            <button key={demo.label} type="button" onClick={() => loadDemoRecap(demo.recap)}>
+              {demo.label}
+            </button>
+          ))}
+        </div>
+
         <div className="recorder-actions">
           <button
             className={`mic-button ${isListening ? 'listening' : ''}`}

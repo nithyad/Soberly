@@ -397,6 +397,34 @@ h1 {
   min-height: 600px;
 }
 
+.demo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(70, 39, 88, 0.1);
+  border-radius: 22px;
+  background: #fff4e9;
+  margin-bottom: 18px;
+  padding: 12px;
+}
+
+.demo-strip span {
+  color: #6d4a3b;
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.demo-strip button {
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #513061;
+  font-size: 0.9rem;
+  font-weight: 800;
+  padding: 9px 12px;
+}
+
 .recorder-actions {
   display: flex;
   flex-wrap: wrap;

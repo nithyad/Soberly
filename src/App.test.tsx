@@ -10,5 +10,6 @@ describe('Soberly website', () => {
     expect(screen.getByRole('link', { name: /try the coach/i })).toHaveAttribute('href', '#voice-agent');
     expect(screen.getByRole('heading', { name: /talk through your date and get a grounded next move/i })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: /safety-forward advice/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /great chemistry/i })).toBeInTheDocument();
   });
 });
